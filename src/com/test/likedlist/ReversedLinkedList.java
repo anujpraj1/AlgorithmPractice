@@ -1,11 +1,11 @@
-package com.test.testfolder;
+package com.test.likedlist;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-public class MergeTwoLinkedList {
+public class ReversedLinkedList {
 
     static class SinglyLinkedListNode {
         public int data;
@@ -51,7 +51,7 @@ public class MergeTwoLinkedList {
         }
     }
 
-    // Complete the mergeLists function below.
+    // Complete the reverse function below.
 
     /*
      * For your reference:
@@ -62,34 +62,18 @@ public class MergeTwoLinkedList {
      * }
      *
      */
-    static SinglyLinkedListNode mergeLists(SinglyLinkedListNode head1, SinglyLinkedListNode head2) {
-    SinglyLinkedListNode dummyNode = new SinglyLinkedListNode(0); 
-    SinglyLinkedListNode tail = dummyNode; 
-    while(true)  
-    { 
-        if(head1 == null) 
-        { 
-            tail.next = head2; 
-            break; 
-        } 
-        if(head2 == null) 
-        { 
-            tail.next = head2; 
-            break; 
-        } 
-        if(head1.data <= head2.data) 
-        { 
-            tail.next = head1; 
-            head1 = head1.next; 
-        }  
-        else
-        { 
-            tail.next = head2; 
-            head2 = head2.next; 
-        } 
-        tail = tail.next; 
-    } 
-    return dummyNode.next; 
+    static SinglyLinkedListNode reverse(SinglyLinkedListNode head) {
+        SinglyLinkedListNode previousNode = null;
+        SinglyLinkedListNode currentNode = head;
+        SinglyLinkedListNode nextNode = head;
+        while (currentNode!= null) {
+            nextNode = currentNode.next;
+            currentNode.next = previousNode;
+            previousNode = currentNode;
+            currentNode = nextNode;
+        }
+        head = previousNode;
+        return head;
     }
 
     private static final Scanner scanner = new Scanner(System.in);
@@ -101,33 +85,21 @@ public class MergeTwoLinkedList {
         scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
         for (int testsItr = 0; testsItr < tests; testsItr++) {
-            SinglyLinkedList llist1 = new SinglyLinkedList();
+            SinglyLinkedList llist = new SinglyLinkedList();
 
-            int llist1Count = scanner.nextInt();
+            int llistCount = scanner.nextInt();
             scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-            for (int i = 0; i < llist1Count; i++) {
-                int llist1Item = scanner.nextInt();
+            for (int i = 0; i < llistCount; i++) {
+                int llistItem = scanner.nextInt();
                 scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
 
-                llist1.insertNode(llist1Item);
-            }
-          
-          	SinglyLinkedList llist2 = new SinglyLinkedList();
-
-            int llist2Count = scanner.nextInt();
-            scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-
-            for (int i = 0; i < llist2Count; i++) {
-                int llist2Item = scanner.nextInt();
-                scanner.skip("(\r\n|[\n\r\u2028\u2029\u0085])?");
-
-                llist2.insertNode(llist2Item);
+                llist.insertNode(llistItem);
             }
 
-            SinglyLinkedListNode llist3 = mergeLists(llist1.head, llist2.head);
+            SinglyLinkedListNode llist1 = reverse(llist.head);
 
-            printSinglyLinkedList(llist3, " ", bufferedWriter);
+            printSinglyLinkedList(llist1, " ", bufferedWriter);
             bufferedWriter.newLine();
         }
 

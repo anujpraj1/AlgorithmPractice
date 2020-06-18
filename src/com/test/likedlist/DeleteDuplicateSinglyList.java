@@ -1,4 +1,4 @@
-package com.test.testfolder;
+package com.test.likedlist;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;

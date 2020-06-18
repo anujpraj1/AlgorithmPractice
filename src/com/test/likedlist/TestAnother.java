@@ -1,4 +1,4 @@
-package com.test.testfolder;
+package com.test.likedlist;
 
 public class TestAnother {
 
