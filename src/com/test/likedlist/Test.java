@@ -1,34 +1,52 @@
 package com.test.likedlist;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
+class Test{
 
-public class Test {
-	public static void main(String[] args) {
-		System.out.println("Hi There !!");
-		int[] arr1 = { 20, 30 };
-		int[] arr2 = { 50, 60 };
-		String a = "20";
-		String b = "30";
+	public static void main(String []argh)
+	{
+		Scanner sc = new Scanner(System.in);
 
-		System.out.println("A & B is :: " + a + " " + b);
-		swap(arr1[0], arr2[0]);
+		while (sc.hasNext()) {
+			String input=sc.next();
+			System.out.println(wellFomed(input));
+		}
 
-		System.out.println("A & B is :: " + a + " " + b);
-		
-		List<String> abc = new ArrayList<>();
-		abc.set(1, "ELEMENT");
-		
-		List<String> def = new LinkedList<>();
-		def.set(1, "ELE");
 	}
 
-	private static void swap(int a, int b) {
-		int temp = 0;
-		temp = a;
-		a = b;
-		b = temp;
-		System.out.println("A & B is :: " + a + " " + b);
+	private static String wellFomed(String input) {
+		int lenghtOfString = input.length();
+		Stack<Character> stk = new Stack();
+		for (int i = 0; i<lenghtOfString; i++) {
+			char currChar = input.charAt(i);
+			switch(currChar) {
+				case '{':
+				case '(':
+				case '[':
+					stk.push(currChar);
+					break;
+				case '}':
+					if (!stk.isEmpty() && stk.pop() != '{') {
+						return "false";
+					}
+					break;
+				case ')':
+					if (!stk.isEmpty() && stk.pop() != '(') {
+						return "false";
+					}
+					break;
+				case ']':
+					if (!stk.isEmpty() && stk.pop() != '[') {
+						return "false";
+					}
+					break;
+				default:
+					System.out.println("Wrong Input");
+			}
+		}
+		return stk.isEmpty() ? "true" : "false";
 	}
 }
+
+
+
